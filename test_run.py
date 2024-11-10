@@ -1,4 +1,4 @@
-from pages import BasePage, LoginPage, InventoryPage, ItemPage, CartPage
+from pages import LoginPage, InventoryPage, ItemPage, CartPage
 
 
 def test_est_1_login(driver):
