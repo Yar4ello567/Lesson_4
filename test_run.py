@@ -17,3 +17,11 @@ def test_est_1_login(driver):
 
     cart_page = CartPage(driver)
     assert cart_page.number_of_products() == 2
+
+def test_auth(driver):
+    auth_page = LoginPage(driver)
+    auth_page.input_login('standard_user')
+    auth_page.input_password('secret_sauce')
+    auth_page.login_button_click()
+
+    assert InventoryPage(driver).check_inventory_page_open()
