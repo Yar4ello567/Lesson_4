@@ -96,3 +96,4 @@ class CartPage(BasePage):
 
     def number_of_products(self) -> int:
         return len(self.find_elements(*self.item_list))
+
