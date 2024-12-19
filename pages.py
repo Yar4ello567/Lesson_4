@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 import allure
 
+
 class BasePage:
     def __init__(self, driver: WebDriver, timeout: int = 10) -> None:
         self.driver: WebDriver = driver
@@ -67,11 +68,10 @@ class InventoryPage(BasePage):
         self.cart_btn = (By.XPATH, '//*[@id="shopping_cart_container"]/a')
 
     @allure.step('Проверить, что открыта страница "https://www.saucedemo.com/inventory.html"')
-    def check_inventory_page_open(self) -> bool:
+    def check_inventory_page_open(self) -> None:
         current_url = self.get_current_url()
         with allure.step('Проверить соответствие URL'):
             assert current_url == self.page_url, f"Ожидалось: {self.page_url}, Получено: {current_url}"
-        return True
 
     @allure.step('Выбрать товар')
     def choose_item(self) -> None:
@@ -106,10 +106,9 @@ class CartPage(BasePage):
         super().__init__(driver, timeout=60)
         self.item_list = (By.XPATH, "//*[@data-test='inventory-item']")
 
-    @allure.step('Получить количество продуктов в корзине')
-    def number_of_products(self) -> int:
+    @allure.step('Проверить количество продуктов в корзине')
+    def check_count_products(self) -> None:
         items = self.find_elements(*self.item_list)
         count = len(items)
         with allure.step(f'Проверить количество элементов в корзине: {count}'):
             assert count >= 0, "Количество продуктов в корзине не может быть отрицательным"
-        return count
