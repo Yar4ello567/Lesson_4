@@ -25,3 +25,5 @@ def test_auth(driver):
     auth_page.login_button_click()
 
     assert InventoryPage(driver).check_inventory_page_open()
+
+
