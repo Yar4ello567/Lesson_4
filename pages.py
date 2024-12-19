@@ -112,3 +112,4 @@ class CartPage(BasePage):
         count = len(items)
         with allure.step(f'Проверить количество элементов в корзине: {count}'):
             assert count >= 0, "Количество продуктов в корзине не может быть отрицательным"
+
