@@ -21,7 +21,6 @@ class BasePage:
             message=f'Элемент {value} не найден'
         )
 
-    @allure.step('Найти элементы {value}')
     def find_elements(self, by: Union[By, str], value: str) -> List[WebElement]:
         return self.wait.until(
             expected_conditions.visibility_of_all_elements_located((by, value)),
@@ -112,4 +111,3 @@ class CartPage(BasePage):
         count = len(items)
         with allure.step(f'Проверить количество элементов в корзине: {count}'):
             assert count >= 0, "Количество продуктов в корзине не может быть отрицательным"
-
