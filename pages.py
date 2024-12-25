@@ -106,8 +106,10 @@ class CartPage(BasePage):
         self.item_list = (By.XPATH, "//*[@data-test='inventory-item']")
 
     @allure.step('Проверить количество продуктов в корзине')
-    def check_count_products(self) -> None:
+    def check_count_products(self, expected_count: int) -> None:
         items = self.find_elements(*self.item_list)
-        count = len(items)
-        with allure.step(f'Проверить количество элементов в корзине: {count}'):
-            assert count >= 0, "Количество продуктов в корзине не может быть отрицательным"
+        actual_count = len(items)
+        with allure.step(f'Проверка ожидаемого ({expected_count}) и фактического ({actual_count}) количества элементов'):
+            assert actual_count == expected_count, \
+f"Ошибка: Ожидалось продуктов в корзине, но найдено {actual_count}"
+
